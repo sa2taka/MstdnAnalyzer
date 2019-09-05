@@ -1,3 +1,19 @@
 #!/usr/bin/env ruby
+require 'thor'
+require 'mstdn_analyzer'
 
-require "mstdn_analyzer"
+class CliAdapter < Thor
+  default_command :analyze
+
+  desc 'analyze', 'analyze toots'
+  method_option :instance_url, type: :string, aliases: '-i', required: true, desc: '[Require]instance url(e.g. https://mstdn-workers.com)'
+  method_option :username, type: :string, aliases: '-u', required: true, desc: '[Require]username(e.g. t0p_l1ght)'
+  method_option :limit, type: :numeric, default: 5000, aliases: '-l', desc: 'limit the number of toots'
+  method_option :boost, type: :boolean, default: false, desc: 'evaluate boost or does not'
+
+  def analyze
+    MstdnAnalyzer.new(options[:instance_url], options[:username], limit: options[:limit], ignore_reblog: options[:no_boost])
+  end
+end
+
+CliAdapter.start
