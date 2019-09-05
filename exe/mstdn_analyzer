@@ -12,7 +12,7 @@ class CliAdapter < Thor
   method_option :boost, type: :boolean, default: false, desc: 'evaluate boost or does not'
 
   def analyze
-    MstdnAnalyzer::Analyzer.new(options[:instance_url], options[:username], limit: options[:limit], ignore_reblog: options[:no_boost]).analyze
+    MstdnAnalyzer::Analyzer.new(options[:instance_url], options[:username], limit: options[:limit], ignore_reblog: options[:no_boost]).result
   end
 end
 
