@@ -1,38 +1,59 @@
 # MstdnAnalyzer
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/mstdn_analyzer`. To experiment with that code, run `bin/console` for an interactive prompt.
+シンプルなマストドンの解析ツールです。  
+[こちらを参考にしています](https://github.com/x0rz/tweets_analyzer)。
 
-TODO: Delete this and the text above, and describe your gem
+ユーザーが面倒くさくなるため、アプリ化をしていません。その為、グローバルなツイートのみしか取得できません。
+そんな理由で、できることが少ないです。
+
+出来ること
+
+- [x] ツイート時間帯などの解析
+
+出来ないこと
+- [x] ダイレクトメッセージなどのリプライの解析
+
+やろうと思えば出来ることは多いですが、取り合えず現時点でできる事は
+
+- 時間ごとのツイート数の解析
+- 曜日ごとのツイート数の解析
+
+となっています。
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'mstdn_analyzer'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+Rubyが必要です。最新版であることが望ましいです。
 
     $ gem install mstdn_analyzer
 
 ## Usage
 
-TODO: Write usage instructions here
+#### Basic
 
-## Development
+    $ mstdn_analyzer -i https://mstdn-workers.com -u t0p_l1ght
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+ サンプリングするtootの数を増やします   
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+    $ mstdn_analyzer -i https://mstdn-workers.com -u t0p_l1ght
 
-## Contributing
+ブーストを含まないで解析します。
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/mstdn_analyzer. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+mstdn_analyzer -i https://mstdn-workers.com -u t0p_l1ght --no-boost
+
+``` sh
+$ mstdn_analyzer help analyze
+Usage:
+  mstdn_analyzer analyze -i, --instance-url=INSTANCE_URL -u, --username=USERNAME
+
+Options:
+  -i, --instance-url=INSTANCE_URL  # [Require]instance url(e.g. https://mstdn-workers.com)
+  -u, --username=USERNAME          # [Require]username(e.g. t0p_l1ght)
+  -l, [--limit=N]                  # limit the number of toots
+                                   # Default: 5000
+      [--boost], [--no-boost]      # evaluate boost or does not
+
+analyze toots
+```
 
 ## License
 
