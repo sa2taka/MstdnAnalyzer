@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Mastodon toot analyzer}
   spec.description   = %q{Mastodon toot analyzer}
-  spec.homepage      = "https://github.com/sa2taka"
+  spec.homepage      = "https://github.com/sa2taka/MstdnAnalyzer"
   spec.license       = "MIT"
 
   # Specify which files should be added to the gem when it is released.
