@@ -121,7 +121,7 @@ module MstdnAnalyzer
         max_id = temp[-1].id
 
         progress.increment
-        if ((max_statuses - 1) / 40 + 1) < 400
+        if ((max_statuses - 1) / 40 + 1) < 200
           sleep(0.3) 
         else
           sleep(1.5)
