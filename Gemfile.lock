@@ -1,0 +1,65 @@
+PATH
+  remote: .
+  specs:
+    mstdn_analyzer (0.1.0)
+      mstdn_ivory
+      nokogiri
+      ruby-progressbar (~> 1.10)
+      thor
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.7.0)
+      public_suffix (>= 2.0.2, < 5.0)
+    domain_name (0.5.20190701)
+      unf (>= 0.0.5, < 1.0.0)
+    faraday (0.15.4)
+      multipart-post (>= 1.2, < 3)
+    http (3.3.0)
+      addressable (~> 2.3)
+      http-cookie (~> 1.0)
+      http-form_data (~> 2.0)
+      http_parser.rb (~> 0.6.0)
+    http-cookie (1.0.3)
+      domain_name (~> 0.5)
+    http-form_data (2.1.1)
+    http_parser.rb (0.6.0)
+    jwt (2.2.1)
+    mini_portile2 (2.4.0)
+    mstdn_ivory (0.5.0)
+      addressable (~> 2.5)
+      http (~> 3.3)
+      oauth2 (~> 1.4)
+      oj (~> 3.5)
+    multi_json (1.13.1)
+    multi_xml (0.6.0)
+    multipart-post (2.1.1)
+    nokogiri (1.10.4)
+      mini_portile2 (~> 2.4.0)
+    oauth2 (1.4.1)
+      faraday (>= 0.8, < 0.16.0)
+      jwt (>= 1.0, < 3.0)
+      multi_json (~> 1.3)
+      multi_xml (~> 0.5)
+      rack (>= 1.2, < 3)
+    oj (3.9.1)
+    public_suffix (4.0.1)
+    rack (2.0.7)
+    rake (10.5.0)
+    ruby-progressbar (1.10.1)
+    thor (0.20.3)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.6)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.17)
+  mstdn_analyzer!
+  rake (~> 10.0)
+
+BUNDLED WITH
+   1.17.2
