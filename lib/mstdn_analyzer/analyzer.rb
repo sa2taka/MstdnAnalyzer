@@ -27,6 +27,11 @@ module MstdnAnalyzer
       puts_line
       display_activity_per_hour
       puts_line
+      puts
+      puts "Weekley activity distribution(per day)"
+      puts_line
+      display_activity_per_day
+      puts_line
     end
 
     private
@@ -42,9 +47,28 @@ module MstdnAnalyzer
     def activity_per_hour
       initial = Array.new(24) { Array.new }
       @statuses.inject(initial) do |activity, status|
-        time = Time.parse(status.created_at)
         # 日本時間にべた書きで変更
-        activity[(time.hour + 9) % 24].append(status)
+        time = Time.parse(status.created_at).localtime("+09:00")
+        activity[time.hour].append(status)
+        activity
+      end
+    end
+
+    def display_activity_per_day
+      activity = activity_per_day
+      wday = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+      max = (activity.max { |a, b| a.count <=> b.count}).count
+      activity.each_with_index do |item, index|
+        puts_graph_line(item.count.to_f / max.to_f, item.count, wday[index])
+      end
+    end
+
+    def activity_per_day
+      initial = Array.new(7) { Array.new }
+      @statuses.inject(initial) do |activity, status|
+        # 日本時間にべた書きで変更
+        time = Time.parse(status.created_at).localtime("+09:00")
+        activity[time.wday].append(status)
         activity
       end
     end
