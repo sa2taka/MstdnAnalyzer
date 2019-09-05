@@ -7,29 +7,30 @@ module MstdnAnalyzer
   class Analyzer
     attr_accessor :instance, :account, :cleint, :statuses
 
-    MAX_TIME = 5
+    def initialize(instance, username, **options)
+      # オプションの解析
+      limit = options[:limit] || 5000
+      is_inore_reblog = options[:ignore_reblog]
 
-    def initialize(instance, username)
-      puts "[InitializeStep]"
       @instance = get_correct_instance(instance)
       @client = MstdnIvory::Client.new(@instance)
       @account = get_id_from_username(username)
-      @statuses = get_statuses
+      @statuses = get_statuses(limit, is_inore_reblog)
     end
 
     private
 
-    def get_statuses
+    def get_statuses(limit, is_inore_reblog)
       max_id = nil
       statuses = []
 
       statuses_count = @client.get("/api/v1/accounts/#{@account}").statuses_count
-      max_statuses =  statuses_count> 5000 ? 5000 : statuses_count
+      max_statuses =  statuses_count> limit ? limit : statuses_count
 
       puts "[Correct Statuses] Correct #{max_statuses} statuses.Wait a minute."
       progress = ProgressBar.create(:title => "   Correcting...", :starting_at => 0, :total => max_statuses / 40)
 
-      MAX_TIME.times do
+      (max_statuses / 40 + 1).times do
         temp = @client.get("/api/v1/accounts/#{@account}/statuses?max_id=#{max_id}&limit=40")
         break if temp.length.zero?
         statuses.concat temp
@@ -40,7 +41,11 @@ module MstdnAnalyzer
       end
       puts "\e[1G    Complete!"
 
-      statuses
+      if is_inore_reblog
+        statuses.select { |s| !(s.reblog)}
+      else
+        statuses
+      end
     end
 
     def get_correct_instance(instance)
